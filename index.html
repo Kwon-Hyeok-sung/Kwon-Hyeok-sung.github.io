@@ -7,17 +7,30 @@
   <title>Kwon Hyeok-sung | Personal Website</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --text: #1f2933;
-      --muted: #5d6875;
-      --line: #d6dde5;
-      --accent: #0f766e;
-      --accent-strong: #134e4a;
-      --accent-soft: #e0f2f1;
-      --warm: #b45309;
-      --shadow: 0 20px 50px rgba(31, 41, 51, 0.12);
+      color-scheme: dark;
+      --primary: #da291c;
+      --primary-active: #b01e0a;
+      --ink: #ffffff;
+      --body: #969696;
+      --body-on-light: #181818;
+      --muted: #666666;
+      --hairline: #303030;
+      --hairline-on-light: #d2d2d2;
+      --canvas: #181818;
+      --canvas-elevated: #303030;
+      --canvas-light: #ffffff;
+      --surface-soft-light: #f7f7f7;
+      --focus: #f6e500;
+      --space-xxs: 8px;
+      --space-xs: 16px;
+      --space-sm: 24px;
+      --space-md: 32px;
+      --space-lg: 48px;
+      --space-xl: 64px;
+      --space-xxl: 96px;
+      --space-super: 128px;
+      --container: 1280px;
+      --font: "FerrariSans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * {
@@ -30,39 +43,49 @@
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    body::selection {
+      background: var(--primary);
+      color: var(--ink);
     }
 
     a {
-      color: var(--accent-strong);
-      text-decoration-thickness: 0.12em;
-      text-underline-offset: 0.18em;
+      color: inherit;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.25em;
     }
 
     a:hover {
-      color: var(--warm);
+      color: var(--primary);
     }
 
     a:focus-visible,
-    button:focus-visible {
-      outline: 3px solid var(--warm);
+    summary:focus-visible {
+      outline: 3px solid var(--focus);
       outline-offset: 4px;
+    }
+
+    img {
+      max-width: 100%;
     }
 
     .skip-link {
       position: absolute;
-      left: 1rem;
-      top: 1rem;
-      z-index: 10;
-      transform: translateY(-150%);
-      background: var(--surface);
-      color: var(--text);
-      padding: 0.55rem 0.75rem;
-      border-radius: 6px;
-      box-shadow: var(--shadow);
+      left: var(--space-xs);
+      top: var(--space-xs);
+      z-index: 20;
+      transform: translateY(-160%);
+      background: var(--canvas-light);
+      color: var(--body-on-light);
+      padding: 10px 14px;
+      text-decoration: none;
     }
 
     .skip-link:focus {
@@ -70,276 +93,519 @@
     }
 
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      background: rgba(248, 250, 252, 0.94);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(10px);
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 10;
+      background: rgba(24, 24, 24, 0.88);
+      border-bottom: 1px solid var(--hairline);
+      backdrop-filter: blur(12px);
     }
 
     .nav {
-      width: min(1120px, calc(100% - 2rem));
+      width: min(var(--container), calc(100% - 48px));
+      height: 64px;
       margin: 0 auto;
-      min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: var(--space-md);
     }
 
     .brand {
-      color: var(--text);
-      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.65px;
       text-decoration: none;
+      text-transform: uppercase;
       white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 10px;
+      height: 28px;
+      display: inline-block;
+      background: var(--primary);
     }
 
     .nav-links {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       justify-content: flex-end;
-      gap: 0.25rem 0.9rem;
+      gap: var(--space-md);
       margin: 0;
       padding: 0;
       list-style: none;
     }
 
-    .nav-links a {
-      color: var(--muted);
-      font-size: 0.95rem;
+    .nav-links a,
+    .mobile-menu summary {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.65px;
       text-decoration: none;
+      text-transform: uppercase;
     }
 
-    .nav-links a:hover {
-      color: var(--accent-strong);
+    .mobile-menu {
+      display: none;
+      position: relative;
+    }
+
+    .mobile-menu summary {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .mobile-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-panel {
+      position: absolute;
+      right: 0;
+      top: 56px;
+      min-width: 220px;
+      padding: var(--space-sm);
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+    }
+
+    .mobile-panel a {
+      display: block;
+      padding: 12px 0;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.65px;
+      text-decoration: none;
+      text-transform: uppercase;
     }
 
     main {
-      width: min(1120px, calc(100% - 2rem));
-      margin: 0 auto;
+      background: var(--canvas);
     }
 
     .hero {
-      min-height: calc(88vh - 72px);
+      min-height: 92vh;
+      position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
-      align-items: center;
-      gap: clamp(2rem, 6vw, 5rem);
-      padding: clamp(3rem, 8vw, 6rem) 0;
+      align-items: end;
+      overflow: hidden;
+      background: var(--canvas);
+      isolation: isolate;
     }
 
-    .eyebrow {
-      margin: 0 0 0.8rem;
-      color: var(--accent-strong);
-      font-size: 0.88rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+    .hero-media,
+    .hero-media img,
+    .hero-fallback,
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-media {
+      z-index: -3;
+      background: var(--canvas);
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: grayscale(0.1) contrast(1.04);
+    }
+
+    .hero-fallback {
+      display: grid;
+      place-items: center;
+      background: var(--canvas-elevated);
+      color: rgba(255, 255, 255, 0.14);
+      font-size: 80px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .hero-shade {
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(24, 24, 24, 0.86), rgba(24, 24, 24, 0.34) 56%, rgba(24, 24, 24, 0.72)),
+        linear-gradient(180deg, rgba(24, 24, 24, 0.18), rgba(24, 24, 24, 0.9));
+    }
+
+    .hero-content {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
+      padding: 160px 0 var(--space-xxl);
+    }
+
+    .kicker,
+    .badge,
+    .meta-label {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      line-height: 1.4;
       text-transform: uppercase;
+    }
+
+    .kicker {
+      color: var(--primary);
     }
 
     h1,
     h2,
-    h3 {
-      margin: 0;
-      line-height: 1.15;
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    .statement {
+      font-weight: 500;
+      letter-spacing: 0;
     }
 
     h1 {
-      max-width: 13ch;
-      font-size: clamp(2.7rem, 8vw, 5.4rem);
+      max-width: 880px;
+      margin-bottom: var(--space-sm);
+      font-size: 80px;
+      line-height: 1.05;
     }
 
     h2 {
-      font-size: clamp(1.65rem, 4vw, 2.4rem);
+      margin-bottom: 0;
+      font-size: 36px;
+      line-height: 1.2;
     }
 
     h3 {
-      font-size: 1.1rem;
+      margin-bottom: var(--space-xs);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
     }
 
     .intro {
-      max-width: 58ch;
-      margin: 1.2rem 0 0;
-      color: var(--muted);
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 560px;
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 2rem;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
     }
 
     .button {
+      min-height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-      padding: 0.7rem 1rem;
-      border: 1px solid var(--accent-strong);
-      border-radius: 6px;
+      padding: 14px 32px;
+      border: 1px solid currentColor;
+      color: var(--ink);
+      font-size: 14px;
       font-weight: 700;
+      letter-spacing: 1.4px;
+      line-height: 1;
       text-decoration: none;
+      text-transform: uppercase;
     }
 
     .button.primary {
-      background: var(--accent-strong);
-      color: #ffffff;
+      border-color: var(--primary);
+      background: var(--primary);
+      color: var(--ink);
     }
 
-    .button.secondary {
-      background: transparent;
-      color: var(--accent-strong);
+    .button.primary:active {
+      border-color: var(--primary-active);
+      background: var(--primary-active);
     }
 
-    .portrait {
-      display: grid;
-      gap: 1rem;
-      justify-items: center;
-    }
-
-    .portrait-frame {
-      width: min(100%, 340px);
-      aspect-ratio: 1;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--accent-soft);
-      box-shadow: var(--shadow);
-    }
-
-    .portrait-frame img,
-    .portrait-fallback {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .portrait-frame img {
-      object-fit: cover;
-    }
-
-    .portrait-fallback {
-      display: grid;
-      place-items: center;
-      color: var(--accent-strong);
-      font-size: clamp(3rem, 12vw, 5.4rem);
-      font-weight: 700;
+    .button.on-light {
+      color: var(--body-on-light);
     }
 
     .section {
-      padding: clamp(3rem, 8vw, 5rem) 0;
-      border-top: 1px solid var(--line);
+      scroll-margin-top: 64px;
+      padding: var(--space-xxl) 0;
+      border-top: 1px solid var(--hairline);
+      background: var(--canvas);
+    }
+
+    .section.light {
+      background: var(--canvas-light);
+      color: var(--body-on-light);
+      border-top-color: var(--hairline-on-light);
+    }
+
+    .section-inner {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
     }
 
     .section-header {
       display: grid;
-      grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
-      gap: clamp(1rem, 5vw, 4rem);
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-xl);
       align-items: start;
-      margin-bottom: 2rem;
+      margin-bottom: var(--space-lg);
     }
 
-    .section-header p {
-      margin: 0;
+    .section-header p,
+    .item p,
+    .cv-copy,
+    .contact-copy {
+      color: var(--body);
+      margin-bottom: 0;
+    }
+
+    .light .section-header p,
+    .light .cv-copy {
       color: var(--muted);
+    }
+
+    .statement {
+      max-width: 850px;
+      margin: 0;
+      color: var(--ink);
+      font-size: 26px;
+      line-height: 1.5;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
+      border-top: 1px solid var(--hairline);
+      border-left: 1px solid var(--hairline);
     }
 
     .item {
-      min-height: 180px;
-      padding: 1.25rem;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-md);
+      background: var(--canvas-elevated);
+      border-right: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
     }
 
-    .item p {
-      margin: 0.7rem 0 0;
-      color: var(--muted);
+    .item-number {
+      color: var(--primary);
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xxs);
+      margin-top: var(--space-md);
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 4px 12px;
+      background: var(--canvas-elevated);
+      color: var(--ink);
+      border-radius: 9999px;
     }
 
     .cv-panel {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1rem;
+      grid-template-columns: minmax(0, 7fr) minmax(220px, 3fr);
+      gap: var(--space-xl);
       align-items: center;
-      padding: clamp(1.25rem, 4vw, 2rem);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
+      padding: var(--space-xl) 0;
+      border-top: 1px solid var(--hairline-on-light);
+      border-bottom: 1px solid var(--hairline-on-light);
     }
 
-    .cv-panel p {
-      margin: 0.5rem 0 0;
-      color: var(--muted);
+    .cv-panel h2 {
+      font-size: 56px;
+      line-height: 1.1;
     }
 
-    .contact-list {
+    .cv-actions {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1rem;
-      margin: 1.25rem 0 0;
+      justify-content: flex-end;
+    }
+
+    .contact-band {
+      scroll-margin-top: 64px;
+      padding: var(--space-xxl) 0;
+      background: var(--primary);
+      color: var(--ink);
+    }
+
+    .contact-band .section-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(220px, 3fr);
+      gap: var(--space-xl);
+      align-items: center;
+    }
+
+    .contact-band h2 {
+      max-width: 760px;
+    }
+
+    .contact-copy {
+      color: var(--ink);
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .site-footer {
+      padding: var(--space-xl) 0;
+      border-top: 1px solid var(--hairline);
+      background: var(--canvas);
+      color: var(--body);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      width: min(var(--container), calc(100% - 48px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-sm);
+      margin: 0;
       padding: 0;
       list-style: none;
     }
 
-    .site-footer {
-      width: min(1120px, calc(100% - 2rem));
-      margin: 0 auto;
-      padding: 2rem 0 3rem;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.95rem;
+    .footer-links a {
+      color: var(--body);
     }
 
-    @media (max-width: 760px) {
-      .site-header {
-        position: static;
+    @media (max-width: 1023px) {
+      .nav-links {
+        gap: var(--space-sm);
       }
 
+      h1 {
+        font-size: 56px;
+        line-height: 1.1;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
       .nav {
-        min-height: auto;
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 1rem 0;
+        width: min(100% - 32px, var(--container));
       }
 
       .nav-links {
-        justify-content: flex-start;
+        display: none;
       }
 
-      .hero,
-      .section-header,
-      .cv-panel {
-        grid-template-columns: 1fr;
+      .mobile-menu {
+        display: block;
       }
 
       .hero {
-        min-height: auto;
+        min-height: 86vh;
       }
 
-      .portrait {
-        justify-items: start;
+      .hero-media img {
+        object-position: center top;
       }
 
-      .portrait-frame {
-        width: min(100%, 280px);
+      .hero-content,
+      .section-inner,
+      .footer-inner {
+        width: min(100% - 32px, var(--container));
+      }
+
+      .hero-content {
+        padding: 128px 0 var(--space-xl);
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      h2,
+      .cv-panel h2 {
+        font-size: 36px;
+        line-height: 1.2;
+      }
+
+      .statement {
+        font-size: 20px;
+      }
+
+      .actions,
+      .button,
+      .contact-actions,
+      .cv-actions {
+        width: 100%;
+      }
+
+      .button {
+        padding-right: var(--space-sm);
+        padding-left: var(--space-sm);
+      }
+
+      .section,
+      .contact-band {
+        padding: var(--space-xl) 0;
+      }
+
+      .section-header,
+      .cv-panel,
+      .contact-band .section-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
       }
 
       .grid {
         grid-template-columns: 1fr;
       }
 
-      .cv-panel .button {
-        width: 100%;
+      .item {
+        min-height: 240px;
+      }
+
+      .cv-actions,
+      .contact-actions {
+        justify-content: stretch;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
@@ -349,103 +615,151 @@
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="#">Kwon Hyeok-sung</a>
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Kwon Hyeok-sung
+      </a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#work">Work</a></li>
         <li><a href="#cv">CV</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <div class="mobile-panel">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#cv">CV</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </details>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero" aria-labelledby="intro-title">
-      <div>
-        <p class="eyebrow">Personal website</p>
+      <div class="hero-media">
+        <img
+          src="assets/profile.jpg"
+          data-fallback-src="assets/profile.png"
+          alt="Portrait of Kwon Hyeok-sung"
+          width="1600"
+          height="1200"
+          onerror="if (this.dataset.fallbackSrc) { this.src = this.dataset.fallbackSrc; this.dataset.fallbackSrc = ''; } else { this.hidden = true; this.nextElementSibling.hidden = false; }">
+        <div class="hero-fallback" hidden aria-hidden="true">KH</div>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <p class="kicker">Personal website</p>
         <h1 id="intro-title">Kwon Hyeok-sung</h1>
         <p class="intro">
-          I build clear, practical software projects and document what I learn along the way.
-          This page collects a short bio, selected work, and my CV.
+          Programming coursework, practical software experiments, and concise notes on what
+          I am building and learning.
         </p>
         <div class="actions" aria-label="Primary actions">
-          <a class="button primary" href="#projects">View projects</a>
-          <a class="button secondary" href="assets/cv.pdf">Download CV</a>
-        </div>
-      </div>
-
-      <div class="portrait" aria-label="Profile image">
-        <div class="portrait-frame">
-          <img
-            src="assets/profile.jpg"
-            data-fallback-src="assets/profile.png"
-            alt="Portrait of Kwon Hyeok-sung"
-            width="680"
-            height="680"
-            onerror="if (this.dataset.fallbackSrc) { this.src = this.dataset.fallbackSrc; this.dataset.fallbackSrc = ''; } else { this.hidden = true; this.nextElementSibling.hidden = false; }">
-          <span class="portrait-fallback" hidden aria-hidden="true">KH</span>
+          <a class="button primary" href="assets/cv.pdf">Download CV</a>
+          <a class="button" href="#work">View work</a>
         </div>
       </div>
     </section>
 
     <section class="section" id="about" aria-labelledby="about-title">
-      <div class="section-header">
-        <h2 id="about-title">About</h2>
-        <p>
-          I am interested in programming, problem solving, and building reliable user-facing
-          tools. I prefer simple interfaces, readable code, and projects that are easy to run.
-        </p>
-      </div>
-    </section>
-
-    <section class="section" id="projects" aria-labelledby="projects-title">
-      <div class="section-header">
-        <h2 id="projects-title">Projects</h2>
-        <p>
-          A compact selection of programming work, experiments, and documentation.
-        </p>
-      </div>
-      <div class="grid">
-        <article class="item">
-          <h3>Programming Coursework</h3>
-          <p>Assignments and exercises focused on fundamentals, correctness, and clean implementation.</p>
-        </article>
-        <article class="item">
-          <h3>Personal Experiments</h3>
-          <p>Small builds for testing ideas, learning new tools, and practicing software design.</p>
-        </article>
-        <article class="item">
-          <h3>Documentation</h3>
-          <p>Notes and writeups that explain project goals, tradeoffs, and how to reproduce results.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="cv" aria-labelledby="cv-title">
-      <div class="cv-panel">
-        <div>
-          <h2 id="cv-title">CV</h2>
-          <p>Download the latest CV as a PDF from the repository assets folder.</p>
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <p class="kicker">About</p>
+            <h2 id="about-title">Focused on clear implementation.</h2>
+          </div>
+          <p class="statement">
+            I am interested in programming, problem solving, and building reliable user-facing
+            tools. I value readable code, simple interfaces, and projects that are easy to run.
+          </p>
         </div>
-        <a class="button primary" href="assets/cv.pdf">Open CV PDF</a>
+        <div class="badge-row" aria-label="Interests">
+          <span class="badge">Programming</span>
+          <span class="badge">Problem Solving</span>
+          <span class="badge">Documentation</span>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="contact" aria-labelledby="contact-title">
-      <div class="section-header">
-        <h2 id="contact-title">Contact</h2>
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <p class="kicker">Selected work</p>
+            <h2 id="work-title">A compact portfolio surface.</h2>
+          </div>
+          <p>
+            These areas organize coursework, independent experiments, and technical notes.
+            Each entry is intentionally short so the page stays direct and easy to scan.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="item">
+            <div class="item-number" aria-hidden="true">01</div>
+            <div>
+              <h3>Programming Coursework</h3>
+              <p>Assignments and exercises focused on fundamentals, correctness, and clean implementation.</p>
+            </div>
+          </article>
+          <article class="item">
+            <div class="item-number" aria-hidden="true">02</div>
+            <div>
+              <h3>Personal Experiments</h3>
+              <p>Small builds for testing ideas, learning new tools, and practicing software design.</p>
+            </div>
+          </article>
+          <article class="item">
+            <div class="item-number" aria-hidden="true">03</div>
+            <div>
+              <h3>Documentation</h3>
+              <p>Notes and writeups that explain goals, tradeoffs, and how to reproduce results.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="cv" aria-labelledby="cv-title">
+      <div class="section-inner">
+        <div class="cv-panel">
+          <div>
+            <p class="meta-label">CV / Resume</p>
+            <h2 id="cv-title">Download the PDF.</h2>
+            <p class="cv-copy">The CV is linked from the repository assets folder for GitHub Pages.</p>
+          </div>
+          <div class="cv-actions">
+            <a class="button primary" href="assets/cv.pdf">Open CV PDF</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-band" id="contact" aria-labelledby="contact-title">
+      <div class="section-inner">
         <div>
-          <p>The GitHub profile for this site is linked below.</p>
-          <ul class="contact-list">
-            <li><a href="https://github.com/Kwon-Hyeok-sung">GitHub</a></li>
-          </ul>
+          <p class="meta-label">Contact</p>
+          <h2 id="contact-title">Find the source and future updates on GitHub.</h2>
+        </div>
+        <div class="contact-actions">
+          <a class="button" href="https://github.com/Kwon-Hyeok-sung">GitHub</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Kwon Hyeok-sung. Built as a static GitHub Pages site.</p>
+    <div class="footer-inner">
+      <p>&copy; 2026 Kwon Hyeok-sung. Static site for GitHub Pages.</p>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#cv">CV</a></li>
+      </ul>
+    </div>
   </footer>
 </body>
 </html>
