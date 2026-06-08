@@ -1,7 +1,451 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal website for Kwon Hyeok-sung.">
+  <title>Kwon Hyeok-sung | Personal Website</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #5d6875;
+      --line: #d6dde5;
+      --accent: #0f766e;
+      --accent-strong: #134e4a;
+      --accent-soft: #e0f2f1;
+      --warm: #b45309;
+      --shadow: 0 20px 50px rgba(31, 41, 51, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration-thickness: 0.12em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: var(--warm);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--warm);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      z-index: 10;
+      transform: translateY(-150%);
+      background: var(--surface);
+      color: var(--text);
+      padding: 0.55rem 0.75rem;
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(248, 250, 252, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.25rem 0.9rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-strong);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: calc(88vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      padding: clamp(3rem, 8vw, 6rem) 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.8rem;
+      color: var(--accent-strong);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 13ch;
+      font-size: clamp(2.7rem, 8vw, 5.4rem);
+    }
+
+    h2 {
+      font-size: clamp(1.65rem, 4vw, 2.4rem);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    .intro {
+      max-width: 58ch;
+      margin: 1.2rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--accent-strong);
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      background: var(--accent-strong);
+      color: #ffffff;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent-strong);
+    }
+
+    .portrait {
+      display: grid;
+      gap: 1rem;
+      justify-items: center;
+    }
+
+    .portrait-frame {
+      width: min(100%, 340px);
+      aspect-ratio: 1;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--accent-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .portrait-frame img,
+    .portrait-fallback {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .portrait-frame img {
+      object-fit: cover;
+    }
+
+    .portrait-fallback {
+      display: grid;
+      place-items: center;
+      color: var(--accent-strong);
+      font-size: clamp(3rem, 12vw, 5.4rem);
+      font-weight: 700;
+    }
+
+    .section {
+      padding: clamp(3rem, 8vw, 5rem) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+      gap: clamp(1rem, 5vw, 4rem);
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .item {
+      min-height: 180px;
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .item p {
+      margin: 0.7rem 0 0;
+      color: var(--muted);
+    }
+
+    .cv-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      padding: clamp(1.25rem, 4vw, 2rem);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .cv-panel p {
+      margin: 0.5rem 0 0;
+      color: var(--muted);
+    }
+
+    .contact-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      margin: 1.25rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .site-footer {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 3rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      .site-header {
+        position: static;
+      }
+
+      .nav {
+        min-height: auto;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1rem 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .hero,
+      .section-header,
+      .cv-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .portrait {
+        justify-items: start;
+      }
+
+      .portrait-frame {
+        width: min(100%, 280px);
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-panel .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
 <body>
-  <h1>Welcome to my Personal Page</h1>
-  <p>Hosted on GitHub Pages!</p>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#">Kwon Hyeok-sung</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="intro-title">
+      <div>
+        <p class="eyebrow">Personal website</p>
+        <h1 id="intro-title">Kwon Hyeok-sung</h1>
+        <p class="intro">
+          I build clear, practical software projects and document what I learn along the way.
+          This page collects a short bio, selected work, and my CV.
+        </p>
+        <div class="actions" aria-label="Primary actions">
+          <a class="button primary" href="#projects">View projects</a>
+          <a class="button secondary" href="assets/cv.pdf">Download CV</a>
+        </div>
+      </div>
+
+      <div class="portrait" aria-label="Profile image">
+        <div class="portrait-frame">
+          <img
+            src="assets/profile.jpg"
+            data-fallback-src="assets/profile.png"
+            alt="Portrait of Kwon Hyeok-sung"
+            width="680"
+            height="680"
+            onerror="if (this.dataset.fallbackSrc) { this.src = this.dataset.fallbackSrc; this.dataset.fallbackSrc = ''; } else { this.hidden = true; this.nextElementSibling.hidden = false; }">
+          <span class="portrait-fallback" hidden aria-hidden="true">KH</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-header">
+        <h2 id="about-title">About</h2>
+        <p>
+          I am interested in programming, problem solving, and building reliable user-facing
+          tools. I prefer simple interfaces, readable code, and projects that are easy to run.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="section-header">
+        <h2 id="projects-title">Projects</h2>
+        <p>
+          A compact selection of programming work, experiments, and documentation.
+        </p>
+      </div>
+      <div class="grid">
+        <article class="item">
+          <h3>Programming Coursework</h3>
+          <p>Assignments and exercises focused on fundamentals, correctness, and clean implementation.</p>
+        </article>
+        <article class="item">
+          <h3>Personal Experiments</h3>
+          <p>Small builds for testing ideas, learning new tools, and practicing software design.</p>
+        </article>
+        <article class="item">
+          <h3>Documentation</h3>
+          <p>Notes and writeups that explain project goals, tradeoffs, and how to reproduce results.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="cv" aria-labelledby="cv-title">
+      <div class="cv-panel">
+        <div>
+          <h2 id="cv-title">CV</h2>
+          <p>Download the latest CV as a PDF from the repository assets folder.</p>
+        </div>
+        <a class="button primary" href="assets/cv.pdf">Open CV PDF</a>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="section-header">
+        <h2 id="contact-title">Contact</h2>
+        <div>
+          <p>The GitHub profile for this site is linked below.</p>
+          <ul class="contact-list">
+            <li><a href="https://github.com/Kwon-Hyeok-sung">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Kwon Hyeok-sung. Built as a static GitHub Pages site.</p>
+  </footer>
 </body>
 </html>
