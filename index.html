@@ -212,7 +212,7 @@
     }
 
     .hero-media {
-      z-index: -3;
+      z-index: 0;
       background: var(--canvas);
     }
 
@@ -236,13 +236,16 @@
     }
 
     .hero-shade {
-      z-index: -2;
+      z-index: 1;
+      pointer-events: none;
       background:
         linear-gradient(90deg, rgba(24, 24, 24, 0.86), rgba(24, 24, 24, 0.34) 56%, rgba(24, 24, 24, 0.72)),
         linear-gradient(180deg, rgba(24, 24, 24, 0.18), rgba(24, 24, 24, 0.9));
     }
 
     .hero-content {
+      position: relative;
+      z-index: 2;
       width: min(var(--container), calc(100% - 48px));
       margin: 0 auto;
       padding: 160px 0 var(--space-xxl);
