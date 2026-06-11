@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Personal website for Kwon Hyeok-sung.">
-  <title>Kwon Hyeok-sung | Personal Website</title>
+  <meta name="description" content="Personal website for Kwon Hyeok Sung.">
+  <title>Kwon Hyeok Sung | Personal Website</title>
   <style>
     :root {
       color-scheme: dark;
@@ -74,6 +74,10 @@
 
     img {
       max-width: 100%;
+    }
+
+    [hidden] {
+      display: none !important;
     }
 
     .skip-link {
@@ -217,12 +221,17 @@
     }
 
     .hero-media img {
-      width: 100%;
-      height: 100%;
+      z-index: 2;
+      top: 50%;
+      bottom: auto;
+      right: clamp(24px, 8vw, 128px);
+      left: auto;
+      width: min(32vw, 413px);
+      height: auto;
       display: block;
-      object-fit: cover;
-      object-position: center 30%;
-      filter: grayscale(0.1) contrast(1.04);
+      object-fit: contain;
+      object-position: right center;
+      transform: translateY(-50%);
     }
 
     .hero-fallback {
@@ -239,13 +248,12 @@
       z-index: 1;
       pointer-events: none;
       background:
-        linear-gradient(90deg, rgba(24, 24, 24, 0.86), rgba(24, 24, 24, 0.34) 56%, rgba(24, 24, 24, 0.72)),
-        linear-gradient(180deg, rgba(24, 24, 24, 0.18), rgba(24, 24, 24, 0.9));
+        linear-gradient(90deg, rgba(24, 24, 24, 0.9), rgba(24, 24, 24, 0.48) 46%, rgba(24, 24, 24, 0) 58%);
     }
 
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       width: min(var(--container), calc(100% - 48px));
       margin: 0 auto;
       padding: 160px 0 var(--space-xxl);
@@ -393,6 +401,39 @@
       line-height: 1.5;
     }
 
+    .profile-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      margin: 0 0 var(--space-md);
+      padding: 0;
+      background: var(--hairline);
+    }
+
+    .profile-fact {
+      margin: 0;
+      padding: var(--space-sm);
+      background: var(--canvas-elevated);
+    }
+
+    .profile-fact dt {
+      margin: 0 0 var(--space-xxs);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .profile-fact dd {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -418,19 +459,54 @@
       line-height: 1;
     }
 
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xxs);
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
       margin-top: var(--space-md);
+      background: var(--hairline);
     }
 
-    .badge {
-      display: inline-flex;
-      padding: 4px 12px;
+    .interest-card {
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs);
       background: var(--canvas-elevated);
+      text-align: center;
+    }
+
+    .interest-icon {
+      width: 100%;
+      height: 96px;
+      display: grid;
+      place-items: center;
+      overflow: visible;
       color: var(--ink);
-      border-radius: 9999px;
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1;
+      transform: translateY(-6px);
+    }
+
+    .interest-icon img {
+      width: auto;
+      height: auto;
+      max-width: 78%;
+      max-height: 78%;
+      object-fit: contain;
+    }
+
+    .interest-icon.ssg-logo {
+      transform: translateY(-16px);
+    }
+
+    .interest-card h3 {
+      margin: 0;
+      text-align: center;
     }
 
     .cv-panel {
@@ -522,6 +598,10 @@
       .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .interest-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 767px) {
@@ -542,7 +622,15 @@
       }
 
       .hero-media img {
+        top: 64px;
+        bottom: auto;
+        right: 0;
+        left: 0;
+        width: min(78vw, 413px);
+        height: auto;
+        margin: 0 auto;
         object-position: center top;
+        transform: none;
       }
 
       .hero-content,
@@ -593,7 +681,15 @@
         gap: var(--space-md);
       }
 
+      .profile-facts {
+        grid-template-columns: 1fr;
+      }
+
       .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .interest-grid {
         grid-template-columns: 1fr;
       }
 
@@ -620,10 +716,10 @@
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#">
         <span class="brand-mark" aria-hidden="true"></span>
-        Kwon Hyeok-sung
+        Kwon Hyeok Sung
       </a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="#about">About Me</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#cv">CV</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -631,7 +727,7 @@
       <details class="mobile-menu">
         <summary>Menu</summary>
         <div class="mobile-panel">
-          <a href="#about">About</a>
+          <a href="#about">About Me</a>
           <a href="#work">Work</a>
           <a href="#cv">CV</a>
           <a href="#contact">Contact</a>
@@ -644,11 +740,11 @@
     <section class="hero" aria-labelledby="intro-title">
       <div class="hero-media">
         <img
-          src="./assets/profile.jpg"
-          data-fallback-src="assets/profile.png"
-          alt="Portrait of Kwon Hyeok-sung"
-          width="1600"
-          height="1200"
+          src="./assets/profile.png"
+          data-fallback-src="./assets/profile.jpg"
+          alt="Portrait of Kwon Hyeok Sung"
+          width="413"
+          height="531"
           onerror="if (this.dataset.fallbackSrc) { this.src = this.dataset.fallbackSrc; this.dataset.fallbackSrc = ''; } else { this.hidden = true; this.nextElementSibling.hidden = false; }">
         <div class="hero-fallback" hidden aria-hidden="true">KH</div>
       </div>
@@ -656,11 +752,7 @@
 
       <div class="hero-content">
         <p class="kicker">Personal website</p>
-        <h1 id="intro-title">Kwon Hyeok-sung</h1>
-        <p class="intro">
-          Programming coursework, practical software experiments, and concise notes on what
-          I am building and learning.
-        </p>
+        <h1 id="intro-title">Kwon Hyeok Sung</h1>
         <div class="actions" aria-label="Primary actions">
           <a class="button primary" href="assets/cv.pdf">Download CV</a>
           <a class="button" href="#work">View work</a>
@@ -672,18 +764,51 @@
       <div class="section-inner">
         <div class="section-header">
           <div>
-            <p class="kicker">About</p>
-            <h2 id="about-title">Focused on clear implementation.</h2>
+            <p class="kicker">About Me</p>
           </div>
-          <p class="statement">
-            I am interested in programming, problem solving, and building reliable user-facing
-            tools. I value readable code, simple interfaces, and projects that are easy to run.
-          </p>
         </div>
-        <div class="badge-row" aria-label="Interests">
-          <span class="badge">Programming</span>
-          <span class="badge">Problem Solving</span>
-          <span class="badge">Documentation</span>
+        <dl class="profile-facts" aria-label="Personal information">
+          <div class="profile-fact">
+            <dt>Name</dt>
+            <dd>Kwon Hyeok Sung</dd>
+          </div>
+          <div class="profile-fact">
+            <dt>School</dt>
+            <dd>Seoul National University</dd>
+          </div>
+          <div class="profile-fact">
+            <dt>Student ID</dt>
+            <dd>2021-XXXXX</dd>
+          </div>
+          <div class="profile-fact">
+            <dt>Major</dt>
+            <dd>Department of Civil, Urban and Environmental Engineering</dd>
+          </div>
+        </dl>
+        <p class="kicker">Interests</p>
+        <div class="interest-grid" aria-label="Hobbies and interests">
+          <article class="interest-card">
+            <div class="interest-icon ssg-logo">
+              <img src="assets/ssg.svg" alt="" loading="lazy">
+            </div>
+            <h3>SSG 랜더스</h3>
+          </article>
+          <article class="interest-card">
+            <div class="interest-icon" aria-hidden="true">💪</div>
+            <h3>헬스</h3>
+          </article>
+          <article class="interest-card">
+            <div class="interest-icon">
+              <img src="assets/lol_logo.png" alt="" loading="lazy">
+            </div>
+            <h3>리그오브레전드</h3>
+          </article>
+          <article class="interest-card">
+            <div class="interest-icon">
+              <img src="assets/pubg.png" alt="" loading="lazy">
+            </div>
+            <h3>배틀그라운드</h3>
+          </article>
         </div>
       </div>
     </section>
@@ -756,9 +881,9 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>&copy; 2026 Kwon Hyeok-sung. Static site for GitHub Pages.</p>
+      <p>&copy; 2026 Kwon Hyeok Sung. Static site for GitHub Pages.</p>
       <ul class="footer-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="#about">About Me</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#cv">CV</a></li>
       </ul>
