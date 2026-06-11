@@ -30,6 +30,8 @@
       --space-xxl: 96px;
       --space-super: 128px;
       --container: 1280px;
+      --section-label-title-gap: 0px;
+      --section-title-content-gap: 0px;
       --font: "FerrariSans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -377,10 +379,43 @@
       grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
       gap: var(--space-xl);
       align-items: start;
-      margin-bottom: var(--space-lg);
+      margin-bottom: var(--section-title-content-gap);
     }
 
-    .section-header p,
+    .section-heading {
+      margin: 0 0 var(--section-title-content-gap);
+    }
+
+    .section-header .section-heading,
+    .cv-panel .section-heading,
+    .contact-band .section-heading {
+      margin-bottom: 0;
+    }
+
+    .section-heading .kicker,
+    .section-heading .meta-label {
+      margin-bottom: var(--section-label-title-gap);
+    }
+
+    .section-heading .kicker + h2 {
+      margin-top: var(--space-xxs);
+    }
+
+    .section-heading h2 {
+      margin: 0;
+    }
+
+    .profile-facts + .section-heading {
+      margin-top: var(--space-lg);
+    }
+
+    .section-header + .profile-facts,
+    .section-header + .grid,
+    .section-heading + .interest-grid {
+      margin-top: var(--space-xs);
+    }
+
+    .section-header p:not(.kicker),
     .item p,
     .cv-copy,
     .contact-copy {
@@ -436,34 +471,49 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      border-top: 1px solid var(--hairline);
-      border-left: 1px solid var(--hairline);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
     }
 
     .item {
       min-height: 280px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: var(--space-xs);
       padding: var(--space-md);
-      background: var(--canvas-elevated);
-      border-right: 1px solid var(--hairline);
-      border-bottom: 1px solid var(--hairline);
+      background: #242424;
+      border: 1px solid var(--hairline);
     }
 
     .item-number {
       color: var(--primary);
-      font-size: 80px;
+      font-size: 48px;
       font-weight: 700;
       line-height: 1;
+    }
+
+    .item h3 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .item-course {
+      display: block;
+      margin-bottom: var(--space-xxs);
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      line-height: 1.4;
+      text-transform: uppercase;
     }
 
     .interest-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1px;
-      margin-top: var(--space-md);
       background: var(--hairline);
     }
 
@@ -678,7 +728,7 @@
       .cv-panel,
       .contact-band .section-inner {
         grid-template-columns: 1fr;
-        gap: var(--space-md);
+        gap: var(--section-title-content-gap);
       }
 
       .profile-facts {
@@ -763,8 +813,9 @@
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="section-inner">
         <div class="section-header">
-          <div>
+          <div class="section-heading">
             <p class="kicker">About Me</p>
+            <h2 id="about-title">인적사항</h2>
           </div>
         </div>
         <dl class="profile-facts" aria-label="Personal information">
@@ -785,7 +836,10 @@
             <dd>Department of Civil, Urban and Environmental Engineering</dd>
           </div>
         </dl>
-        <p class="kicker">Interests</p>
+        <div class="section-heading">
+          <p class="kicker">Interests</p>
+          <h2>관심사</h2>
+        </div>
         <div class="interest-grid" aria-label="Hobbies and interests">
           <article class="interest-card">
             <div class="interest-icon ssg-logo">
@@ -816,35 +870,42 @@
     <section class="section" id="work" aria-labelledby="work-title">
       <div class="section-inner">
         <div class="section-header">
-          <div>
-            <p class="kicker">Selected work</p>
-            <h2 id="work-title">A compact portfolio surface.</h2>
+          <div class="section-heading">
+            <p class="kicker">PROJECT</p>
+            <h2 id="work-title">주요 프로젝트</h2>
           </div>
-          <p>
-            These areas organize coursework, independent experiments, and technical notes.
-            Each entry is intentionally short so the page stays direct and easy to scan.
-          </p>
         </div>
         <div class="grid">
           <article class="item">
             <div class="item-number" aria-hidden="true">01</div>
             <div>
-              <h3>Programming Coursework</h3>
-              <p>Assignments and exercises focused on fundamentals, correctness, and clean implementation.</p>
+              <span class="item-course">[457.307] Construction Planning and Management</span>
+              <h3>세종포천고속도로 14공구 건설 프로젝트</h3>
+              <p>세종포천고속도로 한강 횡단 구간 약 2km에 대한 프로젝트 매니저를 맡아 한 학기 동안 팀 발표 자료를 준비했습니다. Risk Management, Cost Estimation, Scheduling, Acquisition Strategy를 세부적으로 계획하며 프로젝트 전반을 설계했습니다.</p>
             </div>
           </article>
           <article class="item">
             <div class="item-number" aria-hidden="true">02</div>
             <div>
-              <h3>Personal Experiments</h3>
-              <p>Small builds for testing ideas, learning new tools, and practicing software design.</p>
+              <span class="item-course">[457.207A] Hydrology</span>
+              <h3>4-Layered Tank Model 기반 유출 시뮬레이션</h3>
+              <p>4층 탱크 모델을 사용해 유역 출구의 유출량을 시뮬레이션하고, 유전 알고리즘(GA)으로 매개변수를 보정했습니다. 계절형과 비계절형 모델을 비교하고 R²와 RMSE로 모델 성능을 평가하며, 매개변수 보정과 모델 구조가 수문 시뮬레이션에 미치는 영향을 분석했습니다.</p>
             </div>
           </article>
           <article class="item">
             <div class="item-number" aria-hidden="true">03</div>
             <div>
-              <h3>Documentation</h3>
-              <p>Notes and writeups that explain goals, tradeoffs, and how to reproduce results.</p>
+              <span class="item-course">[457.302] Urban Design</span>
+              <h3>인공지능과 도시설계</h3>
+              <p>미국 뉴욕 배터리파크시티를 도시설계 관점에서 분석하고, 생성형 인공지능을 활용해 도시를 재설계했습니다.</p>
+            </div>
+          </article>
+          <article class="item">
+            <div class="item-number" aria-hidden="true">04</div>
+            <div>
+              <span class="item-course">[M1586.004400] Sustainable Engineering for Civil and Environment Systems</span>
+              <h3>시멘트 산업 환경 경영 비교 분석</h3>
+              <p>시멘트 산업의 환경 경영 전략을 비교 분석하기 위해 쌍용 C&amp;E와 HOLCIM의 지속가능경영 보고서를 분석했습니다. OpenLCA와 ecoinvent 데이터베이스를 활용해 직접 LCA를 수행하고, 국내 기업에 대한 개선점을 제언했습니다.</p>
             </div>
           </article>
         </div>
@@ -854,7 +915,7 @@
     <section class="section light" id="cv" aria-labelledby="cv-title">
       <div class="section-inner">
         <div class="cv-panel">
-          <div>
+          <div class="section-heading">
             <p class="meta-label">CV / Resume</p>
             <h2 id="cv-title">Download the PDF.</h2>
             <p class="cv-copy">The CV is linked from the repository assets folder for GitHub Pages.</p>
@@ -868,7 +929,7 @@
 
     <section class="contact-band" id="contact" aria-labelledby="contact-title">
       <div class="section-inner">
-        <div>
+        <div class="section-heading">
           <p class="meta-label">Contact</p>
           <h2 id="contact-title">Find the source and future updates on GitHub.</h2>
         </div>
