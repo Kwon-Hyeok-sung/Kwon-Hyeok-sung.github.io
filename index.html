@@ -641,6 +641,101 @@
       line-height: 1;
     }
 
+    .planned-courses {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--hairline-on-light);
+    }
+
+    .planned-courses h3 {
+      margin-bottom: var(--space-sm);
+      color: var(--body-on-light);
+      font-size: 14px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .course-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin: 0;
+      padding: 0;
+      background: var(--hairline-on-light);
+      list-style: none;
+    }
+
+    .course-list li {
+      display: grid;
+      gap: 6px;
+      padding: var(--space-sm);
+      background: var(--canvas-light);
+      color: var(--body-on-light);
+    }
+
+    .course-code {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .course-name {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .ai-usage {
+      scroll-margin-top: 64px;
+      padding: var(--space-xl) 0;
+      border-top: 1px solid var(--hairline);
+      background: var(--canvas-elevated);
+    }
+
+    .ai-usage-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .ai-usage-list {
+      display: grid;
+      gap: 1px;
+      margin: 0;
+      padding: 0;
+      background: var(--hairline);
+    }
+
+    .ai-usage-item {
+      display: grid;
+      grid-template-columns: minmax(96px, 1fr) minmax(0, 4fr);
+      gap: var(--space-sm);
+      padding: var(--space-sm);
+      background: #242424;
+    }
+
+    .ai-usage-item dt {
+      margin: 0;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .ai-usage-item dd {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
     .contact-band {
       scroll-margin-top: 64px;
       padding: var(--space-xxl) 0;
@@ -837,7 +932,8 @@
 
       .section-header,
       .cv-panel,
-      .contact-band .section-inner {
+      .contact-band .section-inner,
+      .ai-usage-panel {
         grid-template-columns: 1fr;
         gap: var(--section-title-content-gap);
       }
@@ -851,6 +947,10 @@
       }
 
       .cv-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .course-list {
         grid-template-columns: 1fr;
       }
 
@@ -869,6 +969,15 @@
 
       .contact-panel {
         margin-top: var(--space-sm);
+      }
+
+      .ai-usage-list {
+        margin-top: var(--space-sm);
+      }
+
+      .ai-usage-item {
+        grid-template-columns: 1fr;
+        gap: var(--space-xxs);
       }
 
       .footer-inner {
@@ -1078,6 +1187,44 @@
               <li>OOP Course Project</li>
             </ul>
           </section>
+        </div>
+        <section class="planned-courses" aria-labelledby="planned-courses-title">
+          <h3 id="planned-courses-title">Planned Courses</h3>
+          <ul class="course-list">
+            <li>
+              <span class="course-code">[420.312]</span>
+              <span class="course-name">반도체소자</span>
+            </li>
+            <li>
+              <span class="course-code">[445.411]</span>
+              <span class="course-name">반도체집적공정</span>
+            </li>
+            <li>
+              <span class="course-code">[M1419.001300]</span>
+              <span class="course-name">양자물리</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="ai-usage" id="ai-usage" aria-labelledby="ai-usage-title">
+      <div class="section-inner">
+        <div class="ai-usage-panel">
+          <div class="section-heading">
+            <p class="kicker">AI Usage</p>
+            <h2 id="ai-usage-title">AI-assisted website improvement.</h2>
+          </div>
+          <dl class="ai-usage-list">
+            <div class="ai-usage-item">
+              <dt>Tool</dt>
+              <dd>Codex</dd>
+            </div>
+            <div class="ai-usage-item">
+              <dt>Prompt</dt>
+              <dd>Add contact information, self-introduction, CV details, planned courses, and AI usage information to my personal website.</dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>
