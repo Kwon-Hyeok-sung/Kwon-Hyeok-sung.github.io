@@ -579,6 +579,68 @@
       justify-content: flex-end;
     }
 
+    .cv-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: var(--space-md);
+      background: var(--hairline-on-light);
+    }
+
+    .cv-summary-block {
+      padding: var(--space-sm);
+      background: var(--surface-soft-light);
+    }
+
+    .cv-summary-block h3 {
+      margin-bottom: var(--space-sm);
+      color: var(--body-on-light);
+      font-size: 14px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .cv-list {
+      display: grid;
+      gap: var(--space-xs);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .cv-list li {
+      display: grid;
+      gap: 4px;
+    }
+
+    .cv-date {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xxs);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skill-list li {
+      padding: 8px 12px;
+      border: 1px solid var(--hairline-on-light);
+      color: var(--body-on-light);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
     .contact-band {
       scroll-margin-top: 64px;
       padding: var(--space-xxl) 0;
@@ -599,6 +661,55 @@
 
     .contact-copy {
       color: var(--ink);
+    }
+
+    .contact-panel {
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .contact-methods {
+      display: grid;
+      gap: 1px;
+      margin: 0;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .contact-method {
+      display: grid;
+      gap: 6px;
+      padding: var(--space-sm);
+      background: rgba(24, 24, 24, 0.18);
+    }
+
+    .contact-method dt {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .contact-method dd {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-method a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-method a:hover {
+      color: var(--ink);
+      text-decoration: underline;
     }
 
     .contact-actions {
@@ -739,6 +850,10 @@
         grid-template-columns: 1fr;
       }
 
+      .cv-summary {
+        grid-template-columns: 1fr;
+      }
+
       .interest-grid {
         grid-template-columns: 1fr;
       }
@@ -750,6 +865,10 @@
       .cv-actions,
       .contact-actions {
         justify-content: stretch;
+      }
+
+      .contact-panel {
+        margin-top: var(--space-sm);
       }
 
       .footer-inner {
@@ -817,6 +936,13 @@
             <p class="kicker">About Me</p>
             <h2 id="about-title">인적사항</h2>
           </div>
+          <p>
+            I am Kwon Hyeok Sung, studying Civil, Urban and Environmental Engineering at Seoul National University.
+            My academic background includes infrastructure planning, hydrology, urban design, and sustainable engineering.
+            Since Fall 2025, I have also been exploring semiconductors and computing as a possible direction for graduate study,
+            beginning with Electric Circuit and continuing with Logic Design, Computer Programming, and Machine Learning Fundamentals.
+            I am interested in connecting engineering systems thinking with computational and hardware-oriented problem solving.
+          </p>
         </div>
         <dl class="profile-facts" aria-label="Personal information">
           <div class="profile-fact">
@@ -917,12 +1043,41 @@
         <div class="cv-panel">
           <div class="section-heading">
             <p class="meta-label">CV / Resume</p>
-            <h2 id="cv-title">Download the PDF.</h2>
-            <p class="cv-copy">The CV is linked from the repository assets folder for GitHub Pages.</p>
+            <h2 id="cv-title">Education, skills, and experience.</h2>
+            <p class="cv-copy">A short overview of my academic path, programming skills, and coursework experience.</p>
           </div>
           <div class="cv-actions">
             <a class="button primary" href="assets/cv.pdf">Open CV PDF</a>
           </div>
+        </div>
+        <div class="cv-summary" aria-label="CV summary">
+          <section class="cv-summary-block" aria-labelledby="education-title">
+            <h3 id="education-title">Education</h3>
+            <ul class="cv-list">
+              <li>
+                <span class="cv-date">Feb 2021</span>
+                Graduated from Incheon Science High School
+              </li>
+              <li>
+                <span class="cv-date">Mar 2021</span>
+                Entered Seoul National University
+              </li>
+            </ul>
+          </section>
+          <section class="cv-summary-block" aria-labelledby="skills-title">
+            <h3 id="skills-title">Skills</h3>
+            <ul class="skill-list">
+              <li>C++</li>
+              <li>Python</li>
+              <li>Java</li>
+            </ul>
+          </section>
+          <section class="cv-summary-block" aria-labelledby="experience-title">
+            <h3 id="experience-title">Experience</h3>
+            <ul class="cv-list">
+              <li>OOP Course Project</li>
+            </ul>
+          </section>
         </div>
       </div>
     </section>
@@ -931,10 +1086,22 @@
       <div class="section-inner">
         <div class="section-heading">
           <p class="meta-label">Contact</p>
-          <h2 id="contact-title">Find the source and future updates on GitHub.</h2>
+          <h2 id="contact-title">Contact information.</h2>
         </div>
-        <div class="contact-actions">
-          <a class="button" href="https://github.com/Kwon-Hyeok-sung">GitHub</a>
+        <div class="contact-panel">
+          <dl class="contact-methods" aria-label="Email addresses">
+            <div class="contact-method">
+              <dt>School email</dt>
+              <dd><a href="mailto:0303khs@snu.ac.kr">0303khs@snu.ac.kr</a></dd>
+            </div>
+            <div class="contact-method">
+              <dt>Personal email</dt>
+              <dd><a href="mailto:030303star@naver.com">030303star@naver.com</a></dd>
+            </div>
+          </dl>
+          <div class="contact-actions">
+            <a class="button" href="https://github.com/Kwon-Hyeok-sung">GitHub</a>
+          </div>
         </div>
       </div>
     </section>

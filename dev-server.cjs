@@ -18,6 +18,7 @@ const mimeTypes = {
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
   ".webp": "image/webp",
+  ".pdf": "application/pdf",
 };
 
 http
